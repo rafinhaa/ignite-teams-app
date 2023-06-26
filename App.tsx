@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Groups } from "./src/screens";
+import { Groups } from "@screens/index";
 
 const App: FC = () => {
   return <Groups />;
