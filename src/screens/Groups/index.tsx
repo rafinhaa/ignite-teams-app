@@ -1,12 +1,11 @@
-import { StatusBar } from "expo-status-bar";
 import { FC } from "react";
-import { Container, Title } from "./styles";
+import { Container } from "./styles";
+import Header from "@components/Header";
 
 const Groups: FC = () => {
   return (
     <Container>
-      <Title>Groups</Title>
-      <StatusBar style="auto" />
+      <Header />
     </Container>
   );
 };
