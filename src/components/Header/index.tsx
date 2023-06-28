@@ -2,11 +2,18 @@ import { FC } from "react";
 
 import LogoImg from "@assets/logo.png";
 
-import { Container, Logo } from "./styles";
+import { BackButton, BackIcon, Container, Logo } from "./styles";
+import { HeaderProps } from "./types";
 
-const Header: FC = () => {
+const Header: FC<HeaderProps> = ({ showBackButton = false }) => {
   return (
     <Container>
+      {showBackButton && (
+        <BackButton>
+          <BackIcon />
+        </BackButton>
+      )}
+
       <Logo source={LogoImg} />
     </Container>
   );
