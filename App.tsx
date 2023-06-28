@@ -1,11 +1,11 @@
 import { FC } from "react";
-import { ThemeProvider } from "styled-components";
-import darkTheme from "@theme/darkTheme";
+import { ThemeProvider } from "styled-components/native";
+import themes from "@theme/index";
 import { Groups } from "@screens/index";
 
 const App: FC = () => {
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={themes.dark}>
       <Groups />
     </ThemeProvider>
   );

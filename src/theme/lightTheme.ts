@@ -1,6 +1,7 @@
+import { DefaultTheme } from "styled-components/native";
 import { defaultTokens } from "./defaultTokens";
 
-export default {
+const theme: DefaultTheme = {
   COLORS: {
     WHITE: "#121204",
 
@@ -19,4 +20,6 @@ export default {
     GRAY_100: "#757575",
   },
   ...defaultTokens,
-};
+} as const;
+
+export default theme;
