@@ -7,7 +7,7 @@ import {
   Roboto_400Regular,
   Roboto_700Bold,
 } from "@expo-google-fonts/roboto";
-import { ActivityIndicator } from "react-native";
+import { Loading } from "@components/index";
 
 const App: FC = () => {
   const [fontsLoaded] = useFonts({
@@ -17,12 +17,7 @@ const App: FC = () => {
 
   const RenderApp: FC<{
     fontsLoaded: boolean;
-  }> = ({ fontsLoaded }) =>
-    fontsLoaded ? (
-      <Groups />
-    ) : (
-      <ActivityIndicator size="large" style={{ flex: 1 }} />
-    );
+  }> = ({ fontsLoaded }) => (fontsLoaded ? <Groups /> : <Loading />);
 
   return (
     <ThemeProvider theme={themes.dark}>

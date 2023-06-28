@@ -4,11 +4,13 @@ export const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
+
   background-color: ${({ theme }) => theme.COLORS.GRAY_600};
-  font-family: ${({ theme }) => theme.FONT_FAMILY.REGULAR};
 `;
 
-export const Title = styled.Text`
-  color: #fff;
-  font-size: 32px;
-`;
+export const LoadIndicator = styled.ActivityIndicator.attrs(
+  ({ theme, size }) => ({
+    color: theme.COLORS.GREEN_700,
+    size: size || "large",
+  })
+)``;
