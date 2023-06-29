@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { ThemeProvider } from "styled-components/native";
 import themes from "@theme/index";
-import { Groups } from "@screens/index";
+import { Groups, NewGroup } from "@screens/index";
 import {
   useFonts,
   Roboto_400Regular,
@@ -18,7 +18,7 @@ const App: FC = () => {
 
   const RenderApp: FC<{
     fontsLoaded: boolean;
-  }> = ({ fontsLoaded }) => (fontsLoaded ? <Groups /> : <Loading />);
+  }> = ({ fontsLoaded }) => (fontsLoaded ? <NewGroup /> : <Loading />);
 
   return (
     <ThemeProvider theme={themes.dark}>
