@@ -16,5 +16,4 @@ export const Container = styled.TextInput.attrs(({ theme }) => ({
 
   border-radius: 6px;
   padding: 16px;
-  margin-bottom: 12px;
 `;

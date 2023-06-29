@@ -8,7 +8,7 @@ export const Container = styled.TouchableOpacity`
   height: 56px;
   justify-content: center;
   align-items: center;
-  margin-left: 12px;
+  margin-right: 12px;
 `;
 
 export const Icon = styled(MaterialIcons).attrs<Pick<ButtonIconProps, "type">>(
