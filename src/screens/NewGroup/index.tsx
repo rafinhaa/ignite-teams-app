@@ -12,7 +12,7 @@ const Groups: FC = () => {
           title="Nova turma"
           subtitle="crie a turma para adicionar as pessoas"
         />
-        <Input />
+        <Input placeholder="Nome da turma" />
         <Button title="Criar" />
       </Content>
     </Container>
