@@ -2,7 +2,7 @@ import { FC } from "react";
 import { Container, Content, Icon } from "./styles";
 import { Header, Button, Highlight, Input } from "@components/index";
 
-const Groups: FC = () => {
+const NewGroup: FC = () => {
   return (
     <Container>
       <Header showBackButton />
@@ -19,4 +19,4 @@ const Groups: FC = () => {
   );
 };
 
-export default Groups;
+export default NewGroup;
