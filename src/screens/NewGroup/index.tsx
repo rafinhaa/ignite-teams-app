@@ -1,6 +1,6 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Container, Content, Icon } from "./styles";
-import { Header, Button, Highlight } from "@components/index";
+import { Header, Button, Highlight, Input } from "@components/index";
 
 const Groups: FC = () => {
   return (
@@ -12,7 +12,7 @@ const Groups: FC = () => {
           title="Nova turma"
           subtitle="crie a turma para adicionar as pessoas"
         />
-
+        <Input />
         <Button title="Criar" />
       </Content>
     </Container>
