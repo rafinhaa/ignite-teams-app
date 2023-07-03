@@ -6,6 +6,7 @@ import Loading from "./Loading";
 import Button from "./Button";
 import Input from "./Input";
 import ButtonIcon from "./ButtonIcon";
+import Filter from "./Filter";
 
 export {
   Loading,
@@ -16,4 +17,5 @@ export {
   Button,
   Input,
   ButtonIcon,
+  Filter,
 };

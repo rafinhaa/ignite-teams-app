@@ -1,6 +1,12 @@
 import { FC } from "react";
 import { Container, Form } from "./styles";
-import { ButtonIcon, Header, Highlight, Input } from "@components/index";
+import {
+  ButtonIcon,
+  Filter,
+  Header,
+  Highlight,
+  Input,
+} from "@components/index";
 
 const Groups: FC = () => {
   return (
@@ -14,6 +20,7 @@ const Groups: FC = () => {
         <Input placeholder="Nome da pessoa" autoCorrect={false} />
         <ButtonIcon icon="add" />
       </Form>
+      <Filter title="Time" />
     </Container>
   );
 };
