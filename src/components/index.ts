@@ -7,6 +7,7 @@ import Button from "./Button";
 import Input from "./Input";
 import ButtonIcon from "./ButtonIcon";
 import Filter from "./Filter";
+import PlayerCard from "./PlayerCard";
 
 export {
   Loading,
@@ -18,4 +19,5 @@ export {
   Input,
   ButtonIcon,
   Filter,
+  PlayerCard,
 };

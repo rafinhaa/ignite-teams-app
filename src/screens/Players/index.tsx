@@ -6,12 +6,13 @@ import {
   Header,
   Highlight,
   Input,
+  PlayerCard,
 } from "@components/index";
 import { FlatList } from "react-native";
 
 const Groups: FC = () => {
   const [team, setTeam] = useState("Time A");
-  const [players, setPlayers] = useState([]);
+  const [players, setPlayers] = useState(["John Doe", "Jane Doe"]);
 
   return (
     <Container>
@@ -39,6 +40,13 @@ const Groups: FC = () => {
         />
         <NumberOfPlayers>{players.length}</NumberOfPlayers>
       </HeaderList>
+      <FlatList
+        data={players}
+        keyExtractor={(item) => item}
+        renderItem={({ item }) => (
+          <PlayerCard name={item} onRemove={() => {}} />
+        )}
+      />
     </Container>
   );
 };
