@@ -8,9 +8,15 @@ import {
   Button,
 } from "@components/index";
 import { FlatList } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const Groups: FC = () => {
   const [groups, setGroups] = useState([]);
+  const { navigate } = useNavigation();
+
+  const handleNewGroup = () => {
+    navigate("new");
+  };
 
   return (
     <Container>
@@ -26,7 +32,7 @@ const Groups: FC = () => {
         contentContainerStyle={groups.length === 0 && { flex: 1 }}
       />
 
-      <Button title="Criar nova turma" />
+      <Button title="Criar nova turma" onPress={handleNewGroup} />
     </Container>
   );
 };
