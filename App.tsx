@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { ThemeProvider } from "styled-components/native";
 import themes from "@theme/index";
-import { Groups, NewGroup, Players } from "@screens/index";
 import {
   useFonts,
   Roboto_400Regular,
@@ -9,6 +8,7 @@ import {
 } from "@expo-google-fonts/roboto";
 import { Loading } from "@components/index";
 import { StatusBar } from "react-native";
+import { Routes } from "@routes/index";
 
 const App: FC = () => {
   const [fontsLoaded] = useFonts({
@@ -18,7 +18,7 @@ const App: FC = () => {
 
   const RenderApp: FC<{
     fontsLoaded: boolean;
-  }> = ({ fontsLoaded }) => (fontsLoaded ? <Players /> : <Loading />);
+  }> = ({ fontsLoaded }) => (fontsLoaded ? <Routes /> : <Loading />);
 
   return (
     <ThemeProvider theme={themes.dark}>
