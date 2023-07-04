@@ -8,11 +8,15 @@ import {
   Button,
 } from "@components/index";
 import { FlatList } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { AppRoutesParamList } from "@routes/app.routes";
 
-const Groups: FC = () => {
+type GroupsProps = {
+  navigation: NativeStackNavigationProp<AppRoutesParamList, "groups">;
+};
+
+const Groups: FC<GroupsProps> = ({ navigation: { navigate } }) => {
   const [groups, setGroups] = useState([]);
-  const { navigate } = useNavigation();
 
   const handleNewGroup = () => {
     navigate("new");
