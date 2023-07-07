@@ -11,18 +11,24 @@ import {
   PlayerCard,
 } from "@components/index";
 import { FlatList } from "react-native";
+import { RouteProp, useRoute } from "@react-navigation/native";
+
+import { AppRoutesParamList } from "@routes/app.routes";
+
+type ProfileScreenNavigationProp = RouteProp<AppRoutesParamList, "players">;
 
 const Groups: FC = () => {
   const [team, setTeam] = useState("Time A");
   const [players, setPlayers] = useState(["John Doe", "Jane Doe"]);
 
+  const {
+    params: { group },
+  } = useRoute<ProfileScreenNavigationProp>();
+
   return (
     <Container>
       <Header showBackButton />
-      <Highlight
-        title="Nome da turma"
-        subtitle="adicione a galera e separe os times"
-      />
+      <Highlight title={group} subtitle="adicione a galera e separe os times" />
       <Form>
         <Input placeholder="Nome da pessoa" autoCorrect={false} />
         <ButtonIcon icon="add" />
