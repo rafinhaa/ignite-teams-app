@@ -3,6 +3,8 @@ import { Container, Content, Icon } from "./styles";
 import { Header, Button, Highlight, Input } from "@components/index";
 import { useNavigation } from "@react-navigation/native";
 import { groupCreate } from "@storage/group/groupCreate";
+import { GroupNameEmptyError } from "@utils/error/groupNameEmpty";
+import { BaseError } from "@utils/error/appError";
 
 const NewGroup: FC = () => {
   const [group, setGroup] = useState("");
@@ -10,9 +12,17 @@ const NewGroup: FC = () => {
 
   const handleNew = async () => {
     try {
+      if (group.trim().length === 0)
+        throw new GroupNameEmptyError("O nome do grupo não pode ser vazio");
+
       await groupCreate(group);
       navigate("players", { group });
-    } catch (error) {}
+    } catch (error) {
+      if (error instanceof BaseError) {
+        return alert(error.message);
+      }
+      alert("Não foi possível criar o grupo");
+    }
   };
 
   return (
