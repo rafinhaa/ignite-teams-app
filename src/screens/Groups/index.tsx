@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import { Container } from "./styles";
 import {
   Header,
@@ -10,17 +10,33 @@ import {
 import { FlatList } from "react-native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { AppRoutesParamList } from "@routes/app.routes";
+import { groupsGetAll } from "@storage/group/groupsGetAll";
+import { useFocusEffect } from "@react-navigation/native";
 
 type GroupsProps = {
   navigation: NativeStackNavigationProp<AppRoutesParamList, "groups">;
 };
 
 const Groups: FC<GroupsProps> = ({ navigation: { navigate } }) => {
-  const [groups, setGroups] = useState([]);
+  const [groups, setGroups] = useState<string[]>([]);
 
   const handleNewGroup = () => {
     navigate("new");
   };
+
+  const fetchGroups = async () => {
+    try {
+      const data = await groupsGetAll();
+
+      setGroups(data);
+    } catch (error) {}
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchGroups();
+    }, [])
+  );
 
   return (
     <Container>

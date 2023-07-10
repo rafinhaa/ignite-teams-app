@@ -2,13 +2,17 @@ import { FC, useState } from "react";
 import { Container, Content, Icon } from "./styles";
 import { Header, Button, Highlight, Input } from "@components/index";
 import { useNavigation } from "@react-navigation/native";
+import { groupCreate } from "@storage/group/groupCreate";
 
 const NewGroup: FC = () => {
   const [group, setGroup] = useState("");
   const { navigate } = useNavigation();
 
-  const handleNew = () => {
-    navigate("players", { group });
+  const handleNew = async () => {
+    try {
+      await groupCreate(group);
+      navigate("players", { group });
+    } catch (error) {}
   };
 
   return (
