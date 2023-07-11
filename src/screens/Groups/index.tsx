@@ -32,6 +32,10 @@ const Groups: FC<GroupsProps> = ({ navigation: { navigate } }) => {
     } catch (error) {}
   };
 
+  const handleOpenGroup = (group: string) => {
+    navigate("players", { group });
+  };
+
   useFocusEffect(
     useCallback(() => {
       fetchGroups();
@@ -45,7 +49,9 @@ const Groups: FC<GroupsProps> = ({ navigation: { navigate } }) => {
       <FlatList
         data={groups}
         keyExtractor={(item) => item}
-        renderItem={({ item }) => <GroupCard title={item} />}
+        renderItem={({ item }) => (
+          <GroupCard title={item} onPress={() => handleOpenGroup(item)} />
+        )}
         ListEmptyComponent={() => (
           <ListEmpty message="Que tal cadastrar a primeira turma?" />
         )}
