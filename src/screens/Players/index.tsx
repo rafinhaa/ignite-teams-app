@@ -14,24 +14,54 @@ import { FlatList } from "react-native";
 import { RouteProp, useRoute } from "@react-navigation/native";
 
 import { AppRoutesParamList } from "@routes/app.routes";
+import { PlayerNameEmptyError } from "@utils/error/PlayerNameEmpty";
+import { playerAddByGroup } from "@storage/player/playerAddByGroup";
+import { BaseError } from "@utils/error/appError";
 
 type ProfileScreenNavigationProp = RouteProp<AppRoutesParamList, "players">;
 
 const Groups: FC = () => {
   const [team, setTeam] = useState("Time A");
   const [players, setPlayers] = useState(["John Doe", "Jane Doe"]);
+  const [newPlayerName, setNewPlayerName] = useState("");
 
   const {
     params: { group },
   } = useRoute<ProfileScreenNavigationProp>();
+
+  const handleAddPlayer = async () => {
+    try {
+      if (newPlayerName.trim().length === 0)
+        throw new PlayerNameEmptyError("O nome do player não pode ser vazio");
+
+      await playerAddByGroup(
+        {
+          name: newPlayerName,
+          team,
+        },
+        group
+      );
+      setNewPlayerName("");
+    } catch (error) {
+      if (error instanceof BaseError) {
+        return alert(error.message);
+      }
+      alert("Não foi possível inserir o player");
+    }
+  };
 
   return (
     <Container>
       <Header showBackButton />
       <Highlight title={group} subtitle="adicione a galera e separe os times" />
       <Form>
-        <Input placeholder="Nome da pessoa" autoCorrect={false} />
-        <ButtonIcon icon="add" />
+        <Input
+          placeholder="Nome da pessoa"
+          autoCorrect={false}
+          onChangeText={setNewPlayerName}
+          value={newPlayerName}
+        />
+        <ButtonIcon icon="add" onPress={handleAddPlayer} />
       </Form>
       <HeaderList>
         <FlatList

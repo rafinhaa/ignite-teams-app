@@ -1,4 +1,4 @@
 export type PlayerStorageDTO = {
-  time: string;
+  team: string;
   name: string;
 };
