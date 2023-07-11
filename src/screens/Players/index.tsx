@@ -17,12 +17,14 @@ import { AppRoutesParamList } from "@routes/app.routes";
 import { PlayerNameEmptyError } from "@utils/error/PlayerNameEmpty";
 import { playerAddByGroup } from "@storage/player/playerAddByGroup";
 import { BaseError } from "@utils/error/appError";
+import { playersGetByGroupAndTeam } from "@storage/player/playersGetByGroupAndTeam";
+import { PlayerStorageDTO } from "@storage/player/PlayerStorageDTO";
 
 type ProfileScreenNavigationProp = RouteProp<AppRoutesParamList, "players">;
 
 const Groups: FC = () => {
   const [team, setTeam] = useState("Time A");
-  const [players, setPlayers] = useState(["John Doe", "Jane Doe"]);
+  const [players, setPlayers] = useState<PlayerStorageDTO[]>([]);
   const [newPlayerName, setNewPlayerName] = useState("");
 
   const {
@@ -47,6 +49,19 @@ const Groups: FC = () => {
         return alert(error.message);
       }
       alert("Não foi possível inserir o player");
+    }
+  };
+
+  const fetchPlayersByTeam = async () => {
+    try {
+      const players = await playersGetByGroupAndTeam(group, team);
+      setPlayers(players);
+    } catch (error) {
+      if (error instanceof BaseError) {
+        return alert(error.message);
+      }
+
+      alert("Não foi possível carregar os jogadores");
     }
   };
 
@@ -81,9 +96,9 @@ const Groups: FC = () => {
       <FlatList
         showsVerticalScrollIndicator={false}
         data={players}
-        keyExtractor={(item) => item}
+        keyExtractor={(item) => item.name}
         renderItem={({ item }) => (
-          <PlayerCard name={item} onRemove={() => {}} />
+          <PlayerCard name={item.name} onRemove={() => {}} />
         )}
         ListEmptyComponent={() => (
           <ListEmpty message="Não há pessoas nessa time" />
