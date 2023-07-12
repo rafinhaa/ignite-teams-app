@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { Container, Form, HeaderList, NumberOfPlayers } from "./styles";
 import {
   Button,
@@ -10,8 +10,8 @@ import {
   ListEmpty,
   PlayerCard,
 } from "@components/index";
-import { FlatList } from "react-native";
-import { RouteProp, useFocusEffect, useRoute } from "@react-navigation/native";
+import { FlatList, TextInput } from "react-native";
+import { RouteProp, useRoute } from "@react-navigation/native";
 
 import { AppRoutesParamList } from "@routes/app.routes";
 import { PlayerNameEmptyError } from "@utils/error/PlayerNameEmpty";
@@ -26,6 +26,7 @@ const Groups: FC = () => {
   const [team, setTeam] = useState("Time A");
   const [players, setPlayers] = useState<PlayerStorageDTO[]>([]);
   const [newPlayerName, setNewPlayerName] = useState("");
+  const newPlayerNameInputRef = useRef<TextInput>(null);
 
   const {
     params: { group },
@@ -43,7 +44,8 @@ const Groups: FC = () => {
         },
         group
       );
-      setNewPlayerName("");
+      newPlayerNameInputRef.current?.blur();
+      newPlayerNameInputRef.current?.clear();
       fetchPlayersByTeam();
     } catch (error) {
       if (error instanceof BaseError) {
@@ -76,10 +78,12 @@ const Groups: FC = () => {
       <Highlight title={group} subtitle="adicione a galera e separe os times" />
       <Form>
         <Input
+          inputRef={newPlayerNameInputRef}
           placeholder="Nome da pessoa"
           autoCorrect={false}
           onChangeText={setNewPlayerName}
-          value={newPlayerName}
+          onSubmitEditing={handleAddPlayer}
+          returnKeyType="done"
         />
         <ButtonIcon icon="add" onPress={handleAddPlayer} />
       </Form>
