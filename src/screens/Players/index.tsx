@@ -19,6 +19,7 @@ import { playerAddByGroup } from "@storage/player/playerAddByGroup";
 import { BaseError } from "@utils/error/appError";
 import { playersGetByGroupAndTeam } from "@storage/player/playersGetByGroupAndTeam";
 import { PlayerStorageDTO } from "@storage/player/PlayerStorageDTO";
+import { playerRemoveByGroup } from "@storage/player/playerRemoveByGroup";
 
 type ProfileScreenNavigationProp = RouteProp<AppRoutesParamList, "players">;
 
@@ -68,6 +69,18 @@ const Groups: FC = () => {
     }
   };
 
+  const handlePlayerRemove = async (player: PlayerStorageDTO) => {
+    try {
+      await playerRemoveByGroup(player, group);
+      fetchPlayersByTeam();
+    } catch (error) {
+      if (error instanceof BaseError) {
+        return alert(error.message);
+      }
+      alert("Não foi possível remover o player");
+    }
+  };
+
   useEffect(() => {
     fetchPlayersByTeam();
   }, [team]);
@@ -107,7 +120,10 @@ const Groups: FC = () => {
         data={players}
         keyExtractor={(item) => item.name}
         renderItem={({ item }) => (
-          <PlayerCard name={item.name} onRemove={() => {}} />
+          <PlayerCard
+            name={item.name}
+            onRemove={() => handlePlayerRemove(item)}
+          />
         )}
         ListEmptyComponent={() => (
           <ListEmpty message="Não há pessoas nessa time" />
