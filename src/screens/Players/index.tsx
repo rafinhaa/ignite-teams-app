@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Container, Form, HeaderList, NumberOfPlayers } from "./styles";
 import {
   Button,
@@ -11,7 +11,7 @@ import {
   PlayerCard,
 } from "@components/index";
 import { FlatList } from "react-native";
-import { RouteProp, useRoute } from "@react-navigation/native";
+import { RouteProp, useFocusEffect, useRoute } from "@react-navigation/native";
 
 import { AppRoutesParamList } from "@routes/app.routes";
 import { PlayerNameEmptyError } from "@utils/error/PlayerNameEmpty";
@@ -44,6 +44,7 @@ const Groups: FC = () => {
         group
       );
       setNewPlayerName("");
+      fetchPlayersByTeam();
     } catch (error) {
       if (error instanceof BaseError) {
         return alert(error.message);
@@ -64,6 +65,10 @@ const Groups: FC = () => {
       alert("Não foi possível carregar os jogadores");
     }
   };
+
+  useEffect(() => {
+    fetchPlayersByTeam();
+  }, [team]);
 
   return (
     <Container>
