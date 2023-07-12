@@ -28,6 +28,8 @@ const Groups: FC<GroupsProps> = ({ navigation: { navigate } }) => {
     try {
       const data = await groupsGetAll();
 
+      console.log(data);
+
       setGroups(data);
     } catch (error) {}
   };

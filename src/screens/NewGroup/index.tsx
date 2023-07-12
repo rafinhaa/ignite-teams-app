@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { Container, Content, Icon } from "./styles";
-import { Header, Button, Highlight, Input } from "@components/index";
+import { Header, Button, Highlight, Input, Space } from "@components/index";
 import { useNavigation } from "@react-navigation/native";
 import { groupCreate } from "@storage/group/groupCreate";
 import { GroupNameEmptyError } from "@utils/error/groupNameEmpty";
@@ -35,6 +35,7 @@ const NewGroup: FC = () => {
           subtitle="crie a turma para adicionar as pessoas"
         />
         <Input placeholder="Nome da turma" onChangeText={setGroup} />
+        <Space height={12} />
         <Button title="Criar" onPress={handleNew} />
       </Content>
     </Container>
